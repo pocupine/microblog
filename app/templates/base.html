@@ -1,0 +1,30 @@
+<html> 
+    <head>
+        {% if title %}
+        <title>{{ title }} - Microblog</title>
+        {% else %}
+        <title>Welcome to Microblog</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>Microblog:
+            <a href="/index">Home</a>
+            <a href="/login">Login</a>
+        </div>
+        <hr>
+        <!--
+        此处我用了 with 结构在当前模板的上下文中来将 get_flashed_messages() 的结果赋值给变 量 messages 。 get_flashed_messages()
+        是Flask中的一个函数，它返回用 flash() 注册过的消息 列表。
+        -->
+        {%with messages=get_flashed_messages()%}
+        {%if messages%}
+        <ul>
+            {%for message in messages%}
+            {{message}}
+            {%endfor%}
+        </ul>
+        {%endif%}
+        {%endwith%}
+        {% block content %}{% endblock %}
+    </body>
+</html>
