@@ -3,13 +3,17 @@
 {%block content%}
     <h1>Sign in</h1>
     <form action="" method="post">
+        <!--form.hidden_tag() 模板参数生成了一个隐藏字段，其中包含一个用于保护表单免受CSRF攻击 的 token 。 对于保护表单，你需要做的所有
+        事情就是在模板中包括这个隐藏的字段，并在Flask配 置中定义 SECRET_KEY 变量，Flask-WTF会完成剩下的工作。-->
         {{form.hidden_tag()}}
         <p>
             {{form.username.label}}<br>
             {{form.username(size=32)}}
-           <!-- {%for error in form.username.errors%}
-            <span style="color:red;">[{{error}}]</span>
-            {%endfor%} -->
+            <!-- This part doesn't work.
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            -->
         </p>
         <p>
             {{form.password.label}}<br>
