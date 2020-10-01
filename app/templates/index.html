@@ -1,6 +1,6 @@
 {%extends "base.html"%}
 {%block content%}
-    Hi,{{user.username}}
+    Hi,{{current_user.username}}
     {%for post in posts%}
     <div>{{post.author.username}} says:{{post.Body}}</div>
     {%endfor%}
