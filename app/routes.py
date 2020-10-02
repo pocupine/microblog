@@ -4,6 +4,14 @@ from app.forms import LoginForm,RegistrationForm
 from flask_login import current_user,login_user,logout_user,login_required
 from app.models import User
 from werkzeug.urls import url_parse
+from datetime import datetime
+
+'''Flask中的 @before_request 装饰器注册在视图函数之前执行的函数'''
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 @app.route('/')
 @app.route('/index')
